@@ -38,7 +38,7 @@ int get_int(char *str)
 char get_char(char *str)
 {
 	int c;
-	//clean stdout
+	//clean stdin
 	while ((c = getchar()) != '\n' && c != EOF)
 		;
 	printf("%s", str);
