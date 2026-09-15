@@ -14,7 +14,7 @@ int main(void)
 	printf("You will owe $%.2f each!\n", half(bill_amount, tax_percent, tip_percent));
 }
 
-// TODO: Complete the function
+// Complete the function
 float half(float bill, float tax, int tip)
 {
 	bill = bill + tax * bill / 100.0f;

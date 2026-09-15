@@ -20,7 +20,7 @@ int main(void)
 
 	for (int i = min; i <= max; i++)
 	{
-		if (prime(i))
+		if (prime(i) == true)
 		{
 			printf("%d\n", i);
 		}

@@ -1,64 +1,81 @@
 #include <stdio.h>
+#include <stdlib.h>
 
-long	digit_count(long nb);
+int		digit_count(long nb);
+char	check_card(long card, int digit_number);
+bool	luhn_valid(long card);
 
 int main(void)
 {
-	long sum = 0;
 	long card;
-	long copy;
-	long digit;
-	long digit_number;
 	char card_type;
 
 	printf("Card number: ");
 	scanf("%ld", &card);
 
-	digit_number = digit_count(card);
-	if (digit_number != 16 && digit_number != 13 && digit_number != 15)
+	card_type = check_card(card, digit_count(card));
+
+	if (luhn_valid(card) == false)
 	{
 		printf("INVALID\n");
-		return 0;
+		exit(EXIT_FAILURE);
 	}
-	copy = card;
+	if (card_type == 'V')
+		printf("VISA\n");
+	else if (card_type == 'M')
+		printf("MASTERCARD\n");
+	else if (card_type == 'A')
+		printf("AMEX\n");
+}
+
+char check_card(long card, int digit_number)
+{
 	if (digit_number == 15)
 	{
-		copy /= 10000000000000L;
-		if (copy != 34 && copy != 37)
+		card /= 10000000000000L;
+		if (card != 34 && card != 37)
 		{
 			printf("INVALID\n");
-			return 0;
+			exit(EXIT_FAILURE);
 		}
-		card_type = 'A';
+		return 'A';
 	}
 	else if (digit_number == 13)
 	{
-		copy /= 1000000000000L;
-		if (copy != 4)
+		card /= 1000000000000L;
+		if (card != 4)
 		{
 			printf("INVALID\n");
-			return 0;
+			exit(EXIT_FAILURE);
 		}
-		card_type = 'V';
+		return 'V';
 	}
-	else
+	else if (digit_number == 16)
 	{
-		copy /= 100000000000000L;
-		if (51 <= copy && copy <= 55)
+		card /= 100000000000000L;
+		if (51 <= card && card <= 55)
 		{
-			card_type = 'M';
+			return 'M';
 		}
 		else
 		{
-			card_type = 'V';
-			copy /= 10;
-			if (copy != 4)
+			card /= 10;
+			if (card != 4)
 			{
 				printf("INVALID\n");
-				return 0;
+				exit(EXIT_FAILURE);
 			}
+			return 'V';
 		}
 	}
+	printf("INVALID\n");
+	exit(EXIT_FAILURE);
+}
+
+bool luhn_valid(long card)
+{
+	long copy, digit;
+	long sum = 0;
 
 	copy = card / 10;
 	while (copy > 0)
@@ -77,20 +94,13 @@ int main(void)
 		sum += copy % 10;
 		copy /= 100;
 	}
-	if (sum % 10 != 0)
-	{
-		printf("INVALID\n");
-		return 0;
-	}
-	if (card_type == 'V')
-		printf("VISA\n");
-	else if (card_type == 'M')
-		printf("MASTERCARD\n");
-	else if (card_type == 'A')
-		printf("AMEX\n");
+	if (sum % 10 == 0)
+		return true;
+	else
+		return false;
 }
 
-long	digit_count(long n)
+int	digit_count(long n)
 {
 	if (n < 10)
 		return (1);
