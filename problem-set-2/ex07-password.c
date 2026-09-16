@@ -22,7 +22,7 @@ int main(void)
 	}
 }
 
-// TODO: Complete the Boolean function below
+// Complete the Boolean function below
 bool valid(char *password)
 {
 	typedef struct

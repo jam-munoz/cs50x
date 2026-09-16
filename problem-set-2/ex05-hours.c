@@ -11,7 +11,7 @@ int main(void)
 
 	for (int i = 0; i < weeks; i++)
 	{
-		printf("Week %i HW Hours: ", i);
+		printf("Week %d HW Hours: ", i);
 		scanf("%d", &hours[i]);
 	}
 
@@ -19,14 +19,13 @@ int main(void)
 	do
 	{
 		output = toupper((unsigned char)get_char("Enter T for total hours, A for average hours per week: "));
-	}
-	while (output != 'T' && output != 'A');
+	}	while (output != 'T' && output != 'A');
 
 	printf("%.1f hours\n", calc_hours(hours, weeks, output));
 	free(hours);
 }
 
-// TODO: complete the calc_hours function
+// complete the calc_hours function
 float calc_hours(int hours[], int weeks, char output)
 {
 	float sum;
