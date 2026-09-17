@@ -12,8 +12,7 @@ int main(void)
 	do
 	{
 		n = get_int("Number of elements: ");
-	}
-	while (n < 1);
+	}	while (n < 1);
 
 	int arr[n];
 
@@ -26,7 +25,7 @@ int main(void)
 	printf("The max value is %d.\n", max(arr, n));
 }
 
-// TODO: return the max value
+// return the max value
 int max(int array[], int n)
 {
 	qsort(array, n, sizeof(int), comp);

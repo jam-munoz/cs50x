@@ -16,7 +16,6 @@
  */
 
 #include "../cs50.h"
-#include <ctype.h>
 
 // Number of menu items
 // Adjust this value (10) to number of items input below
